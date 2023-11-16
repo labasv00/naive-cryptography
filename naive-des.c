@@ -246,22 +246,23 @@ void decipher_des(char* key, char* ciphertext, char* plaintext) {
 int main() {
     //char key[] = "011010";
     //char plaintext[] = "01001100";
-    char key[] = "111010";
-    char plaintext_L[] = "01001100"; // L in binary
-    char plaintext_A[] = "01000001"; // A in binary
-    char plaintext_V[] = "01010110"; // V in binary
+    char key[] = "011010";
+    char plaintext_L[] = "00011010"; // L in binary
+    char plaintext_A[] = "01001011"; // A in binary
+    // char plaintext_V[] = "01010110"; // V in binary
+    
     char ciphertext[sizeof(plaintext_L)];
 
-    char iv[] = "10100010";
+    char iv[] = "00000000";
 
     xor_strings(plaintext_L, iv, plaintext_L, 9); // CBC xor with iv
-    printf("L:\n"); cipher_des(key, plaintext_L, ciphertext);
+    printf("1:\n"); cipher_des(key, plaintext_L, ciphertext);
 
     xor_strings(plaintext_A, ciphertext, plaintext_A, 9); // CBC xor with previous
-    printf("\nA:\n"); cipher_des(key, plaintext_A, ciphertext);
+    printf("\n2:\n"); cipher_des(key, plaintext_A, ciphertext);
 
-    xor_strings(plaintext_V, ciphertext, plaintext_V, 9); // CBC xor with previous
-    printf("\nV:\n"); cipher_des(key, plaintext_V, ciphertext);
+    // xor_strings(plaintext_V, ciphertext, plaintext_V, 9); // CBC xor with previous
+    // printf("\nV:\n"); cipher_des(key, plaintext_V, ciphertext);
 
     // printf("-- DECIPHER --\n");
     // char plaintext2[sizeof(plaintext_L)];    
